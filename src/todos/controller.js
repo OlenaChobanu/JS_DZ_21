@@ -18,10 +18,6 @@ export default class TodoController {
         this.init();
     }
 
-    // async getTodos(){
-    //     const todos = await this.#model.getTodos();
-    //     console.log(todos, )
-    // }
     async init(){
         const todos = await this.#model.getTodos();
         this.#view.initialRender(todos);

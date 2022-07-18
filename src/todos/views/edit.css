@@ -1,0 +1,13 @@
+.inp-edit {
+    margin-bottom: 15px;
+}
+
+.inp-edit:first-of-type {
+    margin-top: 15px;
+}
+
+.edit-todo-cont {
+    flex: 1;
+    padding: 5px;
+    padding-top: 100px;
+}

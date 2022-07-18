@@ -1,5 +1,41 @@
-.edit-container {
-    width: 400px;
-    height: 300px;
-    border: 2px solid red;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+
+.wrapper {
+    width: 800px;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 30px 15px;
+    border: 1px solid gray;
+    text-align: center;
+    border-radius: 5px;
+    background-color: aqua;
+}
+
+input {
+    padding: 5px;
+}
+
+.todos-container {
+    height: 95%;
+    display: flex;
+    margin-top: 30px;
+}
+
+.hidden {
+    display: none;
+}
+
+.btn  {
+    padding: 5px 10px;
+    background-color: lightgreen;
+    border-radius: 8px;
+    border-color: gray;
+}
+
+.completed-todo {
+    background-color: rgb(163, 241, 163);
 }

@@ -7,10 +7,6 @@ export default class Http {
     get(url){
         return axios(this.#API_URL + url).then(r => r.data);
     }
-
-    // getSingle(id){
-    //     return axios(this.#API_URL + id).then(r => r.data);
-    // }
     
     create(url, item){
         return axios.post(this.#API_URL + url, item).then(r => r.data);

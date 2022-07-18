@@ -1,15 +1,27 @@
 import * as $ from 'jquery';
+import './list.css';
+import TodoEditView from "./edit";
 
 export default class TodoListView {
     #container = null;
     #options = null;
+
     #todos = [];
     #currentId = null;
+
+    #editView = null;
+    #editContainer = null;
 
     constructor(container, options) {
         this.#container = container;
         this.#options = options;
-        // this.#todos = todos;
+
+        this.initContainer();
+        this.#editView = new TodoEditView(this.#editContainer, this.#options);
+    }
+
+    initContainer() {
+        this.#editContainer = $('.edit-todo-cont');
     }
 
     renderTodos(todos) {
@@ -34,8 +46,6 @@ export default class TodoListView {
     }
 
     onTodoClick = (e) => {
-        console.log(e.target)
-        // console.log(this.#todos)
         if ($(e.target).hasClass('single-todo')) {
             this.#currentId = e.target.id;
             $('.single-todo').removeClass('single-todo-active');
@@ -44,7 +54,6 @@ export default class TodoListView {
             this.#currentId = e.target.closest('.single-todo').id;
             $('.single-todo').removeClass('single-todo-active');
             $(e.target).parent('.single-todo').addClass('single-todo-active');
-
         }
 
         if(e.target.classList.contains('btn-delete')) {
@@ -52,8 +61,14 @@ export default class TodoListView {
         } else if(e.target.classList.contains('btn-complete')) {
             this.onTodoComplete(this.#todos, this.#currentId); 
         } else {
+            this.renderEdit();
+            this.#editView.initListener(this.#todos, this.#currentId);
             $('.edit-todo').removeClass('hidden');
         } 
+    }
+
+    renderEdit(todos, currentId){
+        this.#editView.renderEdit(todos, currentId);
     }
 
     onTodoDelete = () => {
@@ -62,8 +77,6 @@ export default class TodoListView {
     }
 
     onTodoComplete = (todos, id) => {
-        // console.log(this.#todos)
-        // console.log(todos,'66')
         $('.edit-todo').addClass('hidden');
         const completedTodo = todos.find(element => element.id == id);
         completedTodo.isComplete = 'true';

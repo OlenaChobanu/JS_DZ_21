@@ -1,32 +1,26 @@
 import TodoHeaderView from "./header";
 import TodoListView from "./list";
-import TodoEditView from "./edit";
 import './view.css';
-import 'jquery';
 import $ from 'jquery';
 
 export default class MainViewTodo {
     #container = null;
     #options = null;
-    #todos = [];
-    #currentId = null;
-
 
     #headerContainer = null;
     #listContainer = null;
-    #editContainer = null;
     
     #listView = null;
     #headerView = null;
-    #editView = null;
 
     constructor(container, options){
         this.#container = container;
         this.#options = options;
+
         this.init();
+
         this.#headerView = new TodoHeaderView(this.#headerContainer, this.#options);
         this.#listView = new TodoListView(this.#listContainer, this.#options);
-        this.#editView = new TodoEditView(this.#editContainer, this.#options);
     }
 
     async init() {
@@ -48,13 +42,11 @@ export default class MainViewTodo {
     initContainers(){
         this.#headerContainer = $('.header');
         this.#listContainer = $('.todos-cont');
-        this.#editContainer = $('.edit-todo-cont');
     }
 
     initialRender(todos) {
         this.renderHeader();
         this.renderTodos(todos);
-        this.renderEdit(todos, this.#currentId);
     }
 
     renderHeader(){
@@ -62,30 +54,15 @@ export default class MainViewTodo {
     }
 
     renderTodos(todos){
-        this.#todos = todos;
-        // console.log(this.#todos)
         this.#listView.renderTodos(todos);
         this.ifTodoCompleted(todos);
-    }
-
-    renderEdit(todos, currentId){
-        this.#editView.renderEdit(todos, currentId);
     }
 
     initListeners(){
         this.#headerView.initListener();
         this.#listView.initListener();
-        this.#editView.initListener();
-        // this.setCurrentId();
     }
-    // setCurrentId(){
-    //     this.#currentId = this.#listView.getCurrentId()
-    //     console.log('this.#currentId83', this.#currentId)
-    // };
 
-    // onTodo(){
-    //     this.#listView.onTodoClick
-    // }
     ifTodoCompleted(todos) {
         let currentData = getCurrentDate(); 
 
@@ -100,12 +77,10 @@ export default class MainViewTodo {
         }
 
         todos.forEach(e => {
-            // console.log(e, '105')
             e.isComplete === true ? (
                 $(`#${e.id}`).addClass('completed-todo'), 
                 $(`#${e.id}`).append(`<li>completeDate: ${currentData}</li>`),
                 $(`#${e.id}`).children('.btn-complete').addClass('hidden')) 
                 : $(`#${e.id}`).addClass('')})
     }
-
 }
