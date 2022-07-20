@@ -78,14 +78,7 @@ export default class MainViewTodo {
         this.#editView.initListener();
         // this.setCurrentId();
     }
-    // setCurrentId(){
-    //     this.#currentId = this.#listView.getCurrentId()
-    //     console.log('this.#currentId83', this.#currentId)
-    // };
-
-    // onTodo(){
-    //     this.#listView.onTodoClick
-    // }
+    
     ifTodoCompleted(todos) {
         let currentData = getCurrentDate(); 
 
